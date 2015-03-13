@@ -12,24 +12,24 @@ int main(){
 	a_list[1] = "assets/world/Alien.png";
 	a_list[2] = "assets/world/block.png";
 	
-	yape_texture texture_list[10];
+	y_texture texture_list[10];
 	
 	if (SDL_Init(SDL_INIT_EVERYTHING) != 0) {
 		printf("Couldn't Initialize SDL!\n");
 		exit(-1);
     	}
 	SDL_Event event;
-    	yape_window window = {
+    	y_window window = {
 		.name = "Cyape 1.1",
 		.done = 0,
-		.size = {
+		.loc = {
 			.x = 0, .y = 0, .w = 800, .h = 600,
 		},
 	};
 	window.window = SDL_CreateWindow(
 		window.name,
-		window.size.x, window.size.y,
-		window.size.w, window.size.h,
+		window.loc.x, window.loc.y,
+		window.loc.w, window.loc.h,
 		SDL_WINDOW_SHOWN
 	);
 	window.rnd = SDL_CreateRenderer(
@@ -40,30 +40,30 @@ int main(){
 	TTF_Init();
 	TTF_Font * font = TTF_OpenFont("main.ttf",20);
 	//FMOD
-	yape_sound song;
+	y_sound song;
 	FMOD_SYSTEM * sound_system;
 	song.channel = 0;
 	FMOD_System_Create(&sound_system);
 	FMOD_System_Init(sound_system, 1, FMOD_INIT_NORMAL, NULL);
-	song = yape_load_sound("assets/music/technicolor.mp3", song.channel, sound_system);
+	song = y_load_sound("assets/music/technicolor.mp3", song.channel, sound_system);
 	//end FMOD
 
 	//load_textures(a_list,2,&texture_list,window.rnd);
-	texture_list[0] = yape_load_texture(a_list[0],window.rnd);
-	texture_list[1] = yape_load_texture(a_list[1],window.rnd);
-	texture_list[2] = yape_load_texture(a_list[2],window.rnd);
+	texture_list[0] = y_load_texture(a_list[0],window.rnd);
+	texture_list[1] = y_load_texture(a_list[1],window.rnd);
+	texture_list[2] = y_load_texture(a_list[2],window.rnd);
 
-	yape_texture * background = &texture_list[0];
-	yape_texture * sprite = &texture_list[1];
-		sprite->size.x = 50;
-		sprite->size.y = 50;
-	yape_texture * block = &texture_list[2];
-		block->size.x = 50;
-		block->size.y = 50;
-	yape_texture sprite_back = *sprite;
+	y_texture * background = &texture_list[0];
+	y_texture * sprite = &texture_list[1];
+		sprite->loc.x = 50;
+		sprite->loc.y = 50;
+	y_texture * block = &texture_list[2];
+		block->loc.x = 50;
+		block->loc.y = 50;
+	y_texture sprite_back = *sprite;
 	
 	SDL_Color color = {0,0,0,0};	
-	yape_label test = yape_make_label("Hello I am a Font!", font, 20, 20, color, window.rnd);
+	y_label test = y_make_label("Hello I am a Font!", color, font, window.rnd);
 
     	while(window.done != 1){
 		while(SDL_PollEvent(&event) != 0){
@@ -87,27 +87,27 @@ int main(){
 						}
 						break;
 					case SDLK_w:
-						sprite->size.y -= 20;
+						sprite->loc.y -= 20;
 						break;
 					case SDLK_s:
-						sprite->size.y += 20;
+						sprite->loc.y += 20;
 						break;
 					case SDLK_a:
-						sprite->size.x -= 20;
+						sprite->loc.x -= 20;
 						break;
 					case SDLK_d:
-						sprite->size.x += 20;
+						sprite->loc.x += 20;
 						break;
 					case SDLK_q:
 						window.done = 1;
 						break;
 					case SDLK_p:
 						if(music_paused == 0){
-							music_paused = yape_pause_sound(&song.channel);
+							music_paused = y_pause_sound(&song.channel);
 							break;
 						}
 						if(music_paused == 1){
-							music_paused = yape_unpause_sound(&song.channel);
+							music_paused = y_unpause_sound(&song.channel);
 						}
 						break;
 				}
@@ -115,30 +115,30 @@ int main(){
 			if(event.type == SDL_KEYUP ) {
 				switch(event.key.keysym.sym) {
 					case SDLK_w:
-						sprite->size.y += 20;
+						sprite->loc.y += 20;
 						break;
 					case SDLK_s:
-						sprite->size.y -= 20;
+						sprite->loc.y -= 20;
 						break;
 					case SDLK_a:
-						sprite->size.x += 20;
+						sprite->loc.x += 20;
 						break;
 					case SDLK_d:
-						sprite->size.x -= 20;
+						sprite->loc.x -= 20;
 						break;
 				}
 			}
 		}
 		if(song_playing == 0)
 		{
-			yape_play_sound(song.sound,&song.channel, sound_system);
+			y_play_sound(song.sound,&song.channel, sound_system);
 			song_playing = 1;
 		}
 			FMOD_System_Update(sound_system);
 		SDL_RenderClear(window.rnd);
-		SDL_RenderCopy(window.rnd,background->image,NULL,&background->size);
-		SDL_RenderCopy(window.rnd,test.image, NULL, &test.size);
-		SDL_RenderCopy(window.rnd,sprite->image,NULL,&sprite->size);
+		SDL_RenderCopy(window.rnd,background->image,NULL,&background->loc);
+		SDL_RenderCopy(window.rnd,test.image, NULL, &test.loc);
+		SDL_RenderCopy(window.rnd,sprite->image,NULL,&sprite->loc);
 		SDL_RenderPresent(window.rnd);
 	}
 	FMOD_Sound_Release(song.sound);
