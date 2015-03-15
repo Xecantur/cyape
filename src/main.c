@@ -1,10 +1,10 @@
-#include "cyape.h"
+#include "main.h"
 //Generated with genfile -c main.c -i "cyape.h"
 
 
 void hollaback_yall(y_texture * hresult, SDL_Renderer * hrnd){
 	y_texture tmp = y_load_texture("assets/world/platform.png",hrnd);
-	hresult = &tmp;
+	(*hresult) = tmp;
 	hresult->loc.x = 300;
 	hresult->loc.y = 200;
 }
@@ -74,24 +74,26 @@ int main(){
 	//SDL_Color color = {0,0,0,0};	
 
 	y_menu main_menu[3];
-	main_menu[0] = y_make_button(400,0,"Button 1 is a non-conformist","assets/ui/button.png",  font, window.rnd);
+	main_menu[0] = y_make_button(400,0,"Add platform","assets/ui/button.png",  font, window.rnd);
 	main_menu[1] = y_make_button(400,100,"Button 2", "assets/ui/button.png", font, window.rnd);
 	main_menu[2] = y_make_button(400,200,"Button 3", "assets/ui/button.png", font, window.rnd);
 	//y_make_menu(main_menu, sizeof main_menu / sizeof main_menu[0], 50, 172);
 	printf("Hello Button: ");  y_pprect(&main_menu[0].tex.loc);
 	printf("Hello ButtonL: "); y_pprect(&main_menu[0].label.loc);
 	
-	y_texture result;
+	y_texture result = *block;
+	result.loc.w = 0;
+	result.loc.h = 0;
 
 	int clicked = 0;
-
+	int new_motion_x = 0, new_motion_y = 0;
 	//start with music paused;
     	while(window.done != 1){
 		while(SDL_PollEvent(&event) != 0){
 			if(event.type == SDL_QUIT){
 				window.done = 1;
 			}
-			if(event.type == SDL_KEYDOWN ){
+			if(event.type == SDL_KEYDOWN && event.key.repeat == 0){
 				switch(event.key.keysym.sym){
 					case SDLK_SPACE:
 						if(hasChanged == 0){
@@ -133,7 +135,7 @@ int main(){
 						break;
 				}
 			}
-			if(event.type == SDL_KEYUP ) {
+			if(event.type == SDL_KEYUP && event.key.repeat == 0) {
 				switch(event.key.keysym.sym) {
 					case SDLK_w:
 						sprite->loc.y += 20;
@@ -149,15 +151,24 @@ int main(){
 						break;
 				}
 			}
+			if(event.type == SDL_MOUSEMOTION && clicked == 1){
+				result.loc.x = event.motion.x;
+				result.loc.y = event.motion.y;
+			}
 			if(event.type == SDL_MOUSEBUTTONDOWN){
 				switch(event.button.button){
 					case SDL_BUTTON_LEFT:
-						clicked = if_clicked(event.motion.x,
+						if(clicked != 1){
+						 if_clicked(event.motion.x,
 							event.motion.y,
 							main_menu[0], 
 							&result, 
 							window.rnd,
 							&hollaback_yall);
+						     clicked = 1;
+						} else {
+							clicked = 0;
+						}
 				}
 			}
 		}
@@ -175,9 +186,7 @@ int main(){
 		for(int i = 0; i <= 2; i++){
 			SDL_RenderCopy(window.rnd, main_menu[i].label.img, NULL, &main_menu[i].label.loc);
 		}
-		if(clicked == 1){
-			SDL_RenderCopy(window.rnd,result.img, NULL, &result.loc);
-		}
+		SDL_RenderCopy(window.rnd,result.img, NULL, &result.loc);
 		SDL_RenderCopy(window.rnd,sprite->img,NULL,&sprite->loc);
 		SDL_RenderPresent(window.rnd);
 	}
