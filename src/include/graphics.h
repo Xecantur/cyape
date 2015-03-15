@@ -25,7 +25,7 @@ typedef struct y_window y_window;
 //! \brief Data type for handling SDL Textures
 struct y_texture{
 	SDL_Rect loc;
-	SDL_Texture * image;
+	SDL_Texture * img;
 	char * name;
 	SDL_Renderer * rnd;
 };
@@ -51,7 +51,7 @@ struct y_label{
 	char * text;
 	int font_size;
 	SDL_Color color;
-	SDL_Texture * image;
+	SDL_Texture * img;
 	TTF_Font * font;
 	SDL_Rect loc;
 };
@@ -70,11 +70,22 @@ y_label y_make_label(char * text, SDL_Color color, TTF_Font * font, SDL_Renderer
 /*------------------------y_button----------------------------*/
 
 struct y_button {
-	y_texture img;
+	y_texture tex;
 	y_label  label;
 };
 
 typedef struct y_button y_button;
 
-y_button y_make_button(char * text, char * button_img, TTF_Font * font, SDL_Renderer * rnd);
+y_button y_make_button(int x, int y, char * text, char * button_img, TTF_Font * font, SDL_Renderer * rnd);
+
+/*-----------------------end of y_button----------------------*/
+
+/*-----------------------y_menu-------------------------------*/
+
+typedef y_button y_menu;
+
+void y_make_menu(y_button * buttons, size_t length, int x, int padding);
+
+int if_clicked(int mouse_x, int mouse_y, y_menu item, y_texture * result, SDL_Renderer * rnd, void (*hollaback)(y_texture * hresult, SDL_Renderer * hrnd));
+
 #endif //__GRAPHICS_H__

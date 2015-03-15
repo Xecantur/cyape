@@ -2,9 +2,18 @@
 //Generated with genfile -c main.c -i "cyape.h"
 
 
+void hollaback_yall(y_texture * hresult, SDL_Renderer * hrnd){
+	y_texture tmp = y_load_texture("assets/world/platform.png",hrnd);
+	hresult = &tmp;
+	hresult->loc.x = 300;
+	hresult->loc.y = 200;
+}
+
+
+
 int main(){
 	
-	int hasChanged = 0, song_playing = 0;
+	int hasChanged = 0, song_playing = 1;
 	int music_paused = 0;
 	char * a_list[3];
 	
@@ -30,7 +39,7 @@ int main(){
 		window.name,
 		window.loc.x, window.loc.y,
 		window.loc.w, window.loc.h,
-		SDL_WINDOW_SHOWN
+		SDL_WINDOW_SHOWN | SDL_WINDOW_RESIZABLE
 	);
 	window.rnd = SDL_CreateRenderer(
 		window.window,
@@ -38,7 +47,7 @@ int main(){
 		SDL_RENDERER_ACCELERATED | SDL_RENDERER_PRESENTVSYNC
 	);
 	TTF_Init();
-	TTF_Font * font = TTF_OpenFont("main.ttf",20);
+	TTF_Font * font = TTF_OpenFont("assets/fonts/main.ttf",20);
 	//FMOD
 	y_sound song;
 	FMOD_SYSTEM * sound_system;
@@ -62,9 +71,21 @@ int main(){
 		block->loc.y = 50;
 	y_texture sprite_back = *sprite;
 	
-	SDL_Color color = {0,0,0,0};	
-	y_label test = y_make_label("Hello I am a Font!", color, font, window.rnd);
+	//SDL_Color color = {0,0,0,0};	
 
+	y_menu main_menu[3];
+	main_menu[0] = y_make_button(400,0,"Button 1 is a non-conformist","assets/ui/button.png",  font, window.rnd);
+	main_menu[1] = y_make_button(400,100,"Button 2", "assets/ui/button.png", font, window.rnd);
+	main_menu[2] = y_make_button(400,200,"Button 3", "assets/ui/button.png", font, window.rnd);
+	//y_make_menu(main_menu, sizeof main_menu / sizeof main_menu[0], 50, 172);
+	printf("Hello Button: ");  y_pprect(&main_menu[0].tex.loc);
+	printf("Hello ButtonL: "); y_pprect(&main_menu[0].label.loc);
+	
+	y_texture result;
+
+	int clicked = 0;
+
+	//start with music paused;
     	while(window.done != 1){
 		while(SDL_PollEvent(&event) != 0){
 			if(event.type == SDL_QUIT){
@@ -74,15 +95,13 @@ int main(){
 				switch(event.key.keysym.sym){
 					case SDLK_SPACE:
 						if(hasChanged == 0){
-							sprite->image = block->image;
+							sprite->img = block->img;
 							hasChanged = 1;
-							puts("Sprite Changed to block");
 							break;
 						}
 						if(hasChanged == 1){
-							sprite->image = sprite_back.image;
+							sprite->img = sprite_back.img;
 							hasChanged = 0;
-							puts("Sprite changed back to sprite");
 							break;
 						}
 						break;
@@ -104,10 +123,12 @@ int main(){
 					case SDLK_p:
 						if(music_paused == 0){
 							music_paused = y_pause_sound(&song.channel);
+							song_playing = 1;
 							break;
 						}
 						if(music_paused == 1){
 							music_paused = y_unpause_sound(&song.channel);
+							song_playing = 0;
 						}
 						break;
 				}
@@ -128,6 +149,17 @@ int main(){
 						break;
 				}
 			}
+			if(event.type == SDL_MOUSEBUTTONDOWN){
+				switch(event.button.button){
+					case SDL_BUTTON_LEFT:
+						clicked = if_clicked(event.motion.x,
+							event.motion.y,
+							main_menu[0], 
+							&result, 
+							window.rnd,
+							&hollaback_yall);
+				}
+			}
 		}
 		if(song_playing == 0)
 		{
@@ -136,9 +168,17 @@ int main(){
 		}
 			FMOD_System_Update(sound_system);
 		SDL_RenderClear(window.rnd);
-		SDL_RenderCopy(window.rnd,background->image,NULL,&background->loc);
-		SDL_RenderCopy(window.rnd,test.image, NULL, &test.loc);
-		SDL_RenderCopy(window.rnd,sprite->image,NULL,&sprite->loc);
+		SDL_RenderCopy(window.rnd,background->img,NULL,&background->loc);
+		for(int i = 0; i <= 2; i++){
+			SDL_RenderCopy(window.rnd, main_menu[i].tex.img, NULL, &main_menu[i].tex.loc);
+		}
+		for(int i = 0; i <= 2; i++){
+			SDL_RenderCopy(window.rnd, main_menu[i].label.img, NULL, &main_menu[i].label.loc);
+		}
+		if(clicked == 1){
+			SDL_RenderCopy(window.rnd,result.img, NULL, &result.loc);
+		}
+		SDL_RenderCopy(window.rnd,sprite->img,NULL,&sprite->loc);
 		SDL_RenderPresent(window.rnd);
 	}
 	FMOD_Sound_Release(song.sound);
