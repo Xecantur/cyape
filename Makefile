@@ -1,6 +1,6 @@
-OBJ = main.c src/include/graphics.c src/include/audio.c src/include/net.c
+OBJ = unit/main.c 
 CFLAGS = -Weverything -Wno-documentation -Wno-padded -Wno-c++-compat -std=c11 -Isrc/ -Isrc/include/
-LFLAGS = -lSDL2_image -lfreetype -lSDL2_ttf -lfmodex
+LFLAGS = -lSDL2_image -lfreetype -lSDL2_ttf -lfmodex -lchipmunk
 BIN="cyape-1.0"
 CC=clang
 all:
