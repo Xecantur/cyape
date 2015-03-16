@@ -9,6 +9,8 @@ struct y_window{
 	SDL_Window * window;
 	SDL_Renderer * rnd;
 	SDL_Rect loc;
+	SDL_Event event;
+	int done;
 	char * title;
 };
 
