@@ -26,5 +26,14 @@ int main(){
 		y_label_update(&text,my_window.rnd);
 		SDL_RenderPresent(my_window.rnd);
 	}
+
+	TTF_CloseFont(font);
+	TTF_Quit();
+	SDL_DestroyTexture(test.data);
+	SDL_DestroyTexture(text.img.data);
+	SDL_DestroyRenderer(my_window.rnd);
+	SDL_DestroyWindow(my_window.window);
+	SDL_Quit();
+
 	return 0;
 }
