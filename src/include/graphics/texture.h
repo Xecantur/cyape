@@ -42,6 +42,8 @@ void y_batch_img_load(char ** asset_list, int num, y_img * img_list, SDL_Rendere
 		img_list[i].loc.w = tmp->w;
 		img_list[i].loc.x = 0;
 		img_list[i].loc.y = 0;
+		img_list[i].pos.x = 0;
+		img_list[i].pos.y = 0;
 		img_list[i].data = SDL_CreateTextureFromSurface(rnd,tmp);
 		SDL_FreeSurface(tmp);
 	}
@@ -49,8 +51,6 @@ void y_batch_img_load(char ** asset_list, int num, y_img * img_list, SDL_Rendere
 void y_img_update(y_img * img,SDL_Renderer *rnd);
 
 void y_img_update(y_img * img,SDL_Renderer *rnd){
-	if(img->pos.x < 0) { img->pos.x = 0; }
-	if(img->pos.y < 0) { img->pos.y = 0; }
 	img->loc.x = img->pos.x;
 	img->loc.y = img->pos.y;
 	SDL_RenderCopy(rnd, img->data, NULL, &img->loc);
