@@ -5,25 +5,26 @@ Cyape will implement the following features in version 1.0 later versioning will
 
 1.x-1.9
 
+1.5 is not Master 1.5 it the Final_Write Branch moniker, Master 1.5 will be marked 1.5.0 
+
 bug fixes may go 1.subversion.1 - 5 (ie 1.0.5 then it would roll over to 1.1) 
 
+1.0 Features are the Same as below but since Final_Write is the Working branch for all intents an purposes Final_Write is Master for the time being until its merged into 1.0 functionality
 
-Features for 1.0:
-[ ] implement level format either xml, custom or possibly yaml not all are required
+Features for 1.5:
+[ ] implement level format using JSON(libjansson)
 [X!] implement texture (including TTF ) loading 
 	!- ("animated" sprites not supported yet);
-[X] implement audio loading and playing pausing was added
-[ ] implement phsyics via Box2d, custom, or possibly chipmunk not all are required
+[X] implement audio loading and playing pausing was added via SDL_Mixer
+[ ] implement phsyics via chipmunk (might still do custom)
 [ ] implement some form of scriptable ai preferably in python
 [ ] implement rudimentary network code ( ie able to send and recieve library structures )
-[ ] implement a menu interface for creating menu's and sub-menu's really just GUI stuff in general like buttons
-[ ] implement save format probably in the same scheme as levels
+[!] implement a menu interface for creating menu's and sub-menu's really just GUI stuff in general like buttons
+	!- ("Buttons and Callbacks implemented in 1.5(Final_Write) ")
+[ ] implement save format with JSON
 [ ] implement input handling via SDL_PollEvent though try to abstract it to avoid relying soley on it
 [ ] beginnings of an in binary level editor
 [ ] implement common place mechanics like stats tracking ie highscore number of deaths
-
-Features for 1.1:
-[ ] redesign working api for Data Oriented Design
 
 Features for 2.0
 [ ] Actual AI 1.0's ai is likely to be pretty stupid so reimplement this

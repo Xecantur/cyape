@@ -1,5 +1,13 @@
 #include "main.h"
 int main(){
+
+
+	if(SDL_Init(SDL_INIT_VIDEO | SDL_INIT_AUDIO | SDL_INIT_EVENTS ) != 0){
+		printf("Couldn't initialize SDL\n");
+		exit(-1);
+	}
+
+
 	y_window my_window = {
 		.title = "Cyape FINAL RW v1.5",
 		.done = 0,
@@ -17,6 +25,19 @@ int main(){
 	y_label text = y_label_create("stuff",color,font,my_window.rnd);
 
 	y_button button = y_make_button("First Button lolz", &button_img, font, color, my_window.rnd);
+
+	y_audio_settings audio_settings = {
+		.freq = Y_AUDIO_44KHZ,
+		.format = Y_AUDIO_FORMAT,
+		.channels = Y_AUDIO_CHANNELS,
+		.chunksize = Y_AUDIO_CHUNK_SIZE
+	};
+	y_audio_init(&audio_settings);
+	y_audio music;
+	bool loaded = y_load_music("assets/music/mists_of_time_4T.ogg",&music);
+	if(loaded == false) exit(-3);
+	loaded = y_play_music(&music);
+	if(loaded == false) exit(-3);
 	button.pos.x = 400;
 	button.pos.y = 300;
 	while(!my_window.done){
@@ -48,6 +69,10 @@ int main(){
 
 	TTF_CloseFont(font);
 	TTF_Quit();
+	y_free_music(&music);
+	y_audio_quit();
+	SDL_DestroyTexture(button.button_img->data);
+	SDL_DestroyTexture(button.label.r_txt);
 	SDL_DestroyTexture(test.data);
 	SDL_DestroyTexture(text.r_txt);
 	SDL_DestroyRenderer(my_window.rnd);
