@@ -1,8 +1,9 @@
-#ifndef __PHYSICS_H__
-#define __PHYSICS_H__
+#ifndef PHYSICS_H
+#define PHYSICS_H
 #include "common.h"
 //Generated with genfile -d physics.h -i "['common.h']"
 
 
 
-#endif //__PHYSICS_H__
+#endif //PHYSICS_H
+

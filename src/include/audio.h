@@ -1,44 +1,45 @@
-#ifndef __AUDIO_H__
-#define __AUDIO_H__
-//Generated with genfile -d audio.h
+#ifndef AUDIO_H
+#define AUDIO_H
 #include "common.h"
+//Generated with genfile -d audio.h -i "['common.h']"
 
-//! \file
-//!  Audio module Definitions;
-//! \brief Data Type for loading and playing audio
-//!
-//! y_sound and the accompanying functions handles loading and playing sound.
-//!
-//! you will still need to initialize FMOD_SYSTEM and free FMOD_SYSTEM and sound
-//! manually via FMOD_System_Init, FMOD_System_Create, FMOD_Sound_Release,
-//! FMOD_System_Close, FMOD_System_Release family of functions.
-//! 
-//! Eventually I may do this via a sound_init() sound_quit()
-struct y_sound {
-	FMOD_SOUND  * sound;
-	FMOD_CHANNEL * channel;
-	FMOD_RESULT    result;
+#define Y_AUDIO_44KHZ 44100
+#define Y_AUDIO_CHUNK_SIZE 4096
+#define Y_AUDIO_FORMAT MIX_DEFAULT_FORMAT
+#define Y_AUDIO_CHANNELS 2
+#define Y_AUDIO_SUPPORTED MIX_INIT_OGG
+
+struct y_audio_settings { 
+	int freq;
+	Uint16 format;
+	int channels;
+	int chunksize;
 };
 
-typedef struct y_sound y_sound;
 
-y_sound y_load_sound(char * sound, FMOD_CHANNEL * channel, FMOD_SYSTEM * system);
-//! \fn y_load_sound(char * sound, FMOD_CHANNEL * channel, FMOD_SYSTEM * system)
-//! \param sound C string path to sound file
-//! \param channel channel in which sound plays
-//! \param system on which sound plays
+typedef struct y_audio_settings y_audio_settings;
 
-int y_pause_sound(FMOD_CHANNEL ** channel); 
-//! \fn y_pause_sound(FMOD_CHANNEL ** channel)
-//! \param channel channel to pause
+struct y_audio { 
+	Mix_Music * music;
+	Mix_Chunk * sound_clip;
+	char * filename;
+	int channel;
+};
 
-int y_unpause_sound(FMOD_CHANNEL ** channel);
-//! \fn y_unpause_sound(FMOD_CHANNEL ** channel);
-//! \param channel channel to unpause
+typedef struct y_audio y_audio;
 
-void y_play_sound(FMOD_SOUND * sound, FMOD_CHANNEL ** channel, FMOD_SYSTEM * system); 
-//! \fn y_play_sound(FMOD_SOUND * sound, FMOD_CHANNEL ** channel, FMOD_SYSTEM * system)
-//! \param sound sound that you want to play
-//! \param channel in which to play sound
-//! \param system on which to play sound
-#endif //__AUDIO_H__
+bool y_audio_init(y_audio_settings * settings);
+bool y_load_music(char * music_file, y_audio * music);
+void y_free_music(y_audio * music);
+bool y_play_music(y_audio * result);
+#define y_pause_music Mix_PauseMusic
+#define y_resume_music Mix_ResumeMusic
+bool y_load_sound(char * sound_file, y_audio * sound);
+void y_free_sound(y_audio * sound);
+bool y_play_sound(y_audio * sound);
+
+#define y_audio_quit Mix_CloseAudio
+
+
+#endif //AUDIO_H
+
