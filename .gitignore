@@ -2,6 +2,6 @@
 cyape-*.*
 *.mp3
 latex
-include
-unit
+inc
+test
 scratchpad
