@@ -19,11 +19,9 @@ struct Window{
 	}size;
 };
 
-typedef struct Window Window; 
 
 int mainLoop(SDL_Event event, void * data);
 
-Window createWindow(char * title, int x, int y, int w, int h);
 
 
 /*------------------------Texture-----------------------------*/
@@ -35,11 +33,9 @@ struct Texture{
 	SDL_Renderer * rnd;
 };
 
-typedef struct Texture Texture;
 
-Texture createTexture(char * tex_name, int x, int y, SDL_Renderer ** rnd);
-void setTexture(Texture * tex, char * tex_name, SDL_Renderer ** rnd);
-void moveTexture(Texture * tex, int x, int y);
+void set_texture(struct Texture * tex, char * tex_name, SDL_Renderer ** rnd);
+void move_texture(struct Texture * tex, int x, int y);
 /*-----------------------Text-------------------------------*/
 
 struct Text{
@@ -51,10 +47,9 @@ struct Text{
 	SDL_Rect size;
 };
 
-typedef struct Text Text;
 
-void setText(Text * txt, char text[80],int font_size,SDL_Renderer * rnd);
-void moveText(Text * txt, int x, int y, SDL_Renderer * rnd);
+void set_text(struct Text * txt, char text[80],int font_size,SDL_Renderer * rnd);
+void move_text(struct Text * txt, int x, int y, SDL_Renderer * rnd);
 /*------------------------Menu----------------------------*/
 
 #endif //__GRAPHICS_H__
