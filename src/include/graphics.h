@@ -37,8 +37,8 @@ struct Texture{
 
 typedef struct Texture Texture;
 
-Texture * createTexture(char * tex_name, int x, int y, SDL_Renderer * rnd);
-void setTexture(Texture * tex, char * tex_name, SDL_Renderer * rnd);
+Texture createTexture(char * tex_name, int x, int y, SDL_Renderer ** rnd);
+void setTexture(Texture * tex, char * tex_name, SDL_Renderer ** rnd);
 void moveTexture(Texture * tex, int x, int y);
 /*-----------------------Text-------------------------------*/
 
