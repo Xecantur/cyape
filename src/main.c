@@ -1,10 +1,10 @@
-#include <cyape.h>
+#include "cyape.h"
 //Generated with genfile -c main.c -i "cyape.h"
 
 
 int main(int argc, char * argv[]){
 	
-	int loaded_tex = 0; int total_tex = 3;
+	int loaded_tex = 0; int total_tex = 2; int hasChanged = 0;
 	char * tex_list[3];
 	
 	tex_list[0] = "assets/ui/background.png";
@@ -12,10 +12,6 @@ int main(int argc, char * argv[]){
 	tex_list[2] = "assets/world/block.png";
 	
 	struct Texture * texture_list[20];
-	
-	struct Texture * background = texture_list[0];
-	struct Texture * sprite = texture_list[1];
-	struct Texture * block = texture_list[2];
 	
 	if(SDL_Init(SDL_INIT_EVERYTHING) != 0){
 		printf("Couldn't Initialize SDL!\n");
@@ -26,34 +22,34 @@ int main(int argc, char * argv[]){
 		.title = "Cyape 1.1",
 		.done = 0,
 		.size = {
-			.x = 0,
-			.y = 0,
-			.w = 800,
-			.h = 600,
+			.x = 0, .y = 0, .w = 800, .h = 600,
 		}
 	};
-		window.window = SDL_CreateWindow(window.title, window.size.x , window.size.y ,window.size.w ,window.size.y,SDL_WINDOW_SHOWN);
+		window.window = SDL_CreateWindow(window.title, window.size.x , window.size.y ,window.size.w ,window.size.h,SDL_WINDOW_SHOWN);
 		window.rnd = SDL_CreateRenderer(window.window,1,SDL_RENDERER_ACCELERATED | SDL_RENDERER_PRESENTVSYNC);
 
 	for(loaded_tex = 0; loaded_tex != total_tex; loaded_tex++){
 		SDL_Surface * tmp = IMG_Load(tex_list[loaded_tex]);
+		printf("Debug: Loading \"%s\" \n",tex_list[loaded_tex]);
 		if(tmp == NULL){
 			printf("Unable to load \"%s\"\n",tex_list[loaded_tex]);
 			exit(-2);
 		}
-		struct Texture tmp_tex_struct = { 
-			.image = SDL_CreateTextureFromSurface(window.rnd,tmp),
-			.size = {
-				.x = 0,
-				.y = 0,
-				.w = tmp->w,
-				.h = tmp->h,
-			},
-			.tex_name = { *tex_list[loaded_tex] },
-		};
-		texture_list[loaded_tex] = &tmp_tex_struct;
+		struct Texture * tmp_tex_struct = (struct Texture *)malloc(sizeof(struct Texture));
+		tmp_tex_struct->image = SDL_CreateTextureFromSurface(window.rnd,tmp);
+		tmp_tex_struct->size.h = tmp->h;
+		tmp_tex_struct->size.w = tmp->w;
+		tmp_tex_struct->tex_name = (char *)malloc(sizeof(char *));
+		tmp_tex_struct->tex_name = tex_list[loaded_tex];
+		texture_list[loaded_tex] = &(*tmp_tex_struct);
 		SDL_FreeSurface(tmp);
 	}
+	struct Texture * background = texture_list[0];
+	struct Texture * sprite = texture_list[1];
+	sprite->size.x = 50;
+	sprite->size.y = 50;
+	struct Texture * block = texture_list[2];
+
     	while(window.done != 1){
 		while(SDL_PollEvent(&event) != 0){
 			if(event.type == SDL_QUIT){
@@ -62,11 +58,23 @@ int main(int argc, char * argv[]){
 			if(event.type == SDL_KEYDOWN && event.key.repeat == 0){
 				switch(event.key.keysym.sym){
 					case SDLK_SPACE:
-						setTexture(&sprite,"assets/world/block.png",&window.rnd);
+						if(hasChanged == 0){
+							hasChanged = 1;
+						} else if (hasChanged == 1){
+							hasChanged = 0;
+						}
 						break;
 					case SDLK_w:
-						moveTexture(&sprite,(sprite->size.x += 10),(sprite->size.y));
+						sprite->size.y--;
 						break;
+					case SDLK_s:
+						sprite->size.y++;
+						break;
+					case SDLK_a:
+						sprite->size.x--;
+						break;
+					case SDLK_d:
+						sprite->size.x++;
 					case SDLK_q:
 						window.done = 1;
 						break;
