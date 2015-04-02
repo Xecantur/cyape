@@ -4,7 +4,7 @@
 
 int main(int argc, char * argv[]){
 	
-	int loaded_tex = 0; int total_tex = 2; int hasChanged = 0;
+	int loaded_tex = 0, total_tex = 2, hasChanged = 0;
 	char * tex_list[3];
 	
 	tex_list[0] = "assets/ui/background.png";
@@ -13,7 +13,7 @@ int main(int argc, char * argv[]){
 	
 	struct Texture * texture_list[20];
 	
-	if(SDL_Init(SDL_INIT_EVERYTHING) != 0){
+	if (SDL_Init(SDL_INIT_EVERYTHING) != 0) {
 		printf("Couldn't Initialize SDL!\n");
 		exit(-1);
     	}
@@ -23,11 +23,19 @@ int main(int argc, char * argv[]){
 		.done = 0,
 		.size = {
 			.x = 0, .y = 0, .w = 800, .h = 600,
-		}
+		},
 	};
-		window.window = SDL_CreateWindow(window.title, window.size.x , window.size.y ,window.size.w ,window.size.h,SDL_WINDOW_SHOWN);
-		window.rnd = SDL_CreateRenderer(window.window,1,SDL_RENDERER_ACCELERATED | SDL_RENDERER_PRESENTVSYNC);
-
+	window.window = SDL_CreateWindow(
+		window.title,
+		window.size.x, window.size.y,
+		window.size.w, window.size.h,
+		SDL_WINDOW_SHOWN
+	);
+	window.rnd = SDL_CreateRenderer(
+		window.window,
+		1, 
+		SDL_RENDERER_ACCELERATED | SDL_RENDERER_PRESENTVSYNC
+	);
 	for(loaded_tex = 0; loaded_tex != total_tex; loaded_tex++){
 		SDL_Surface * tmp = IMG_Load(tex_list[loaded_tex]);
 		printf("Debug: Loading \"%s\" \n",tex_list[loaded_tex]);
@@ -49,7 +57,9 @@ int main(int argc, char * argv[]){
 	sprite->size.x = 50;
 	sprite->size.y = 50;
 	struct Texture * block = texture_list[2];
-
+	block->size.x = 50;
+	block->size.y = 50;
+	SDL_Texture ** sprite_img = &sprite->image;
     	while(window.done != 1){
 		while(SDL_PollEvent(&event) != 0){
 			if(event.type == SDL_QUIT){
@@ -59,8 +69,10 @@ int main(int argc, char * argv[]){
 				switch(event.key.keysym.sym){
 					case SDLK_SPACE:
 						if(hasChanged == 0){
+							sprite->image = block->image;
 							hasChanged = 1;
 						} else if (hasChanged == 1){
+							sprite->image = *sprite_img;
 							hasChanged = 0;
 						}
 						break;
@@ -75,6 +87,7 @@ int main(int argc, char * argv[]){
 						break;
 					case SDLK_d:
 						sprite->size.x++;
+						break;
 					case SDLK_q:
 						window.done = 1;
 						break;
