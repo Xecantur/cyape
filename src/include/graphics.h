@@ -9,23 +9,25 @@ void pprect(SDL_Rect * rect); //print pointer rect
 
 struct Window{
 	SDL_Window * window;
-	char * title;
+	char * name;
 	int done;
 	SDL_Renderer * rnd;
 	SDL_Rect size;
 };
 
+typedef struct Window Window;
 
 /*------------------------Texture-----------------------------*/
 
 struct Texture{
 	SDL_Rect size;
 	SDL_Texture * image;
-	char * tex_name;
+	char * name;
 	SDL_Renderer * rnd;
 };
 
-
+typedef struct Texture Texture;
+void load_textures(char ** a_list, uint8_t n_textures,Texture * t_list,SDL_Renderer * rnd);
 /*-----------------------Text-------------------------------*/
 
 struct Text{

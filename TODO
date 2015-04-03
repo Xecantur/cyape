@@ -1,0 +1,28 @@
+
+						CYAPE's TODO list
+
+Cyape will implement the following features in version 1.0 later versioning will follow the following scheme
+
+1.x-1.9
+
+bug fixes may go 1.subversion.1 - 5 (ie 1.0.5 then it would roll over to 1.1) 
+
+
+Features for 1.0
+[ ] implement level format either xml, custom or possibly yaml not all are required
+[ ] implement texture loading 
+[ ] implement audio loading and playing
+[ ] implement phsyics via Box2d, custom, or possibly chipmunk not all are required
+[ ] implement some form of scriptable ai preferably in python
+[ ] implement rudimentary network code ( ie able to send and recieve library structures )
+[ ] implement a menu interface for creating menu's and sub-menu's really just GUI stuff in general like buttons
+[ ] implement save format probably in the same scheme as levels
+[ ] implement input handling via SDL_PollEvent though try to abstract it to avoid relying soley on it
+[ ] beginnings of an in binary level editor
+[ ] implement common place mechanics like stats tracking ie highscore number of deaths
+
+Features for 2.0
+[ ] Actual AI 1.0's ai is likely to be pretty stupid so reimplement this
+[ ] clean up code base and optimize where possible
+[ ] if at all possible implement different types of AI (simple, smart, mediocre, enemy, friendly)
+==TBC==

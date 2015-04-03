@@ -2,31 +2,31 @@
 //Generated with genfile -c main.c -i "cyape.h"
 
 
-int main(int argc, char * argv[]){
+int main(){
 	
-	int loaded_tex = 0, total_tex = 2, hasChanged = 0;
-	char * tex_list[3];
+	int hasChanged = 0;
+	char * a_list[3];
 	
-	tex_list[0] = "assets/ui/background.png";
-	tex_list[1] = "assets/world/Alien.png";
-	tex_list[2] = "assets/world/block.png";
+	a_list[0] = "assets/ui/background.png";
+	a_list[1] = "assets/world/Alien.png";
+	a_list[2] = "assets/world/block.png";
 	
-	struct Texture * texture_list[20];
+	struct Texture texture_list[10];
 	
 	if (SDL_Init(SDL_INIT_EVERYTHING) != 0) {
 		printf("Couldn't Initialize SDL!\n");
 		exit(-1);
     	}
 	SDL_Event event;
-    	struct Window window = {
-		.title = "Cyape 1.1",
+    	Window window = {
+		.name = "Cyape 1.1",
 		.done = 0,
 		.size = {
 			.x = 0, .y = 0, .w = 800, .h = 600,
 		},
 	};
 	window.window = SDL_CreateWindow(
-		window.title,
+		window.name,
 		window.size.x, window.size.y,
 		window.size.w, window.size.h,
 		SDL_WINDOW_SHOWN
@@ -36,30 +36,18 @@ int main(int argc, char * argv[]){
 		1, 
 		SDL_RENDERER_ACCELERATED | SDL_RENDERER_PRESENTVSYNC
 	);
-	for(loaded_tex = 0; loaded_tex != total_tex; loaded_tex++){
-		SDL_Surface * tmp = IMG_Load(tex_list[loaded_tex]);
-		printf("Debug: Loading \"%s\" \n",tex_list[loaded_tex]);
-		if(tmp == NULL){
-			printf("Unable to load \"%s\"\n",tex_list[loaded_tex]);
-			exit(-2);
-		}
-		struct Texture * tmp_tex_struct = (struct Texture *)malloc(sizeof(struct Texture));
-		tmp_tex_struct->image = SDL_CreateTextureFromSurface(window.rnd,tmp);
-		tmp_tex_struct->size.h = tmp->h;
-		tmp_tex_struct->size.w = tmp->w;
-		tmp_tex_struct->tex_name = (char *)malloc(sizeof(char *));
-		tmp_tex_struct->tex_name = tex_list[loaded_tex];
-		texture_list[loaded_tex] = &(*tmp_tex_struct);
-		SDL_FreeSurface(tmp);
-	}
-	struct Texture * background = texture_list[0];
-	struct Texture * sprite = texture_list[1];
-	sprite->size.x = 50;
-	sprite->size.y = 50;
-	struct Texture * block = texture_list[2];
-	block->size.x = 50;
-	block->size.y = 50;
+
+	load_textures(a_list,2,&texture_list,window.rnd);
+
+	struct Texture * background = &texture_list[0];
+	struct Texture * sprite = &texture_list[1];
+		sprite->size.x = 50;
+		sprite->size.y = 50;
+	struct Texture * block = &texture_list[2];
+		block->size.x = 50;
+		block->size.y = 50;
 	SDL_Texture ** sprite_img = &sprite->image;
+
     	while(window.done != 1){
 		while(SDL_PollEvent(&event) != 0){
 			if(event.type == SDL_QUIT){
@@ -77,16 +65,16 @@ int main(int argc, char * argv[]){
 						}
 						break;
 					case SDLK_w:
-						sprite->size.y--;
+						sprite->size.y += 20;
 						break;
 					case SDLK_s:
-						sprite->size.y++;
+						sprite->size.y -= 20;
 						break;
 					case SDLK_a:
-						sprite->size.x--;
+						sprite->size.x -= 20;
 						break;
 					case SDLK_d:
-						sprite->size.x++;
+						sprite->size.x += 20;
 						break;
 					case SDLK_q:
 						window.done = 1;
