@@ -8,11 +8,11 @@ Cyape will implement the following features in version 1.0 later versioning will
 bug fixes may go 1.subversion.1 - 5 (ie 1.0.5 then it would roll over to 1.1) 
 
 
-Features for 1.0
+Features for 1.0:
 [ ] implement level format either xml, custom or possibly yaml not all are required
-[X] implement texture (including TTF ) loading 
-[X!] implement audio loading and playing 
-	!- (loading and playing currently working pause has not been tested yet)
+[X!] implement texture (including TTF ) loading 
+	!- ("animated" sprites not supported yet);
+[X] implement audio loading and playing pausing was added
 [ ] implement phsyics via Box2d, custom, or possibly chipmunk not all are required
 [ ] implement some form of scriptable ai preferably in python
 [ ] implement rudimentary network code ( ie able to send and recieve library structures )
@@ -21,6 +21,9 @@ Features for 1.0
 [ ] implement input handling via SDL_PollEvent though try to abstract it to avoid relying soley on it
 [ ] beginnings of an in binary level editor
 [ ] implement common place mechanics like stats tracking ie highscore number of deaths
+
+Features for 1.1:
+[ ] redesign working api for Data Oriented Design
 
 Features for 2.0
 [ ] Actual AI 1.0's ai is likely to be pretty stupid so reimplement this

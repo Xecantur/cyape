@@ -4,7 +4,8 @@
 
 int main(){
 	
-	int hasChanged = 0, song_playing = 0, song_paused = 0;
+	int hasChanged = 0, song_playing = 0;
+	int music_paused = 0;
 	char * a_list[3];
 	
 	a_list[0] = "assets/ui/background.png";
@@ -41,6 +42,7 @@ int main(){
 	//FMOD
 	yape_sound song;
 	FMOD_SYSTEM * sound_system;
+	song.channel = 0;
 	FMOD_System_Create(&sound_system);
 	FMOD_System_Init(sound_system, 1, FMOD_INIT_NORMAL, NULL);
 	song = yape_load_sound("assets/music/technicolor.mp3", song.channel, sound_system);
@@ -99,6 +101,15 @@ int main(){
 					case SDLK_q:
 						window.done = 1;
 						break;
+					case SDLK_p:
+						if(music_paused == 0){
+							music_paused = yape_pause_sound(&song.channel);
+							break;
+						}
+						if(music_paused == 1){
+							music_paused = yape_unpause_sound(&song.channel);
+						}
+						break;
 				}
 			}
 			if(event.type == SDL_KEYUP ) {
@@ -120,12 +131,10 @@ int main(){
 		}
 		if(song_playing == 0)
 		{
-			yape_play_sound(song.sound, song.channel, sound_system);
+			yape_play_sound(song.sound,&song.channel, sound_system);
 			song_playing = 1;
 		}
-		if(song_playing == 1 && song_paused != 0) {
 			FMOD_System_Update(sound_system);
-		}
 		SDL_RenderClear(window.rnd);
 		SDL_RenderCopy(window.rnd,background->image,NULL,&background->size);
 		SDL_RenderCopy(window.rnd,test.image, NULL, &test.size);

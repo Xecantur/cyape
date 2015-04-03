@@ -94,6 +94,9 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="title">audio.h File Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
+
+<p>Data Type for loading and playing audio.  
+<a href="#details">More...</a></p>
 <div class="textblock"><code>#include &quot;common.h&quot;</code><br />
 </div>
 <p><a href="audio_8h_source.html">Go to the source code of this file.</a></p>
@@ -101,7 +104,6 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="nested-classes"></a>
 Classes</h2></td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structyape__sound.html">yape_sound</a></td></tr>
-<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Data Type for loading and playing audio.  <a href="structyape__sound.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="typedef-members"></a>
@@ -114,51 +116,19 @@ typedef struct <a class="el" href="structyape__sound.html">yape_sound</a>&#160;<
 Functions</h2></td></tr>
 <tr class="memitem:a9139fa56319eb512c39314be9b65b829"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structyape__sound.html">yape_sound</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="audio_8h.html#a9139fa56319eb512c39314be9b65b829">yape_load_sound</a> (char *sound, FMOD_CHANNEL *channel, FMOD_SYSTEM *system)</td></tr>
 <tr class="separator:a9139fa56319eb512c39314be9b65b829"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ab5bdbb5489532d28ee2a92a02d5c0dcb"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="audio_8h.html#ab5bdbb5489532d28ee2a92a02d5c0dcb">yape_pause_sound</a> (FMOD_CHANNEL *channel)</td></tr>
-<tr class="separator:ab5bdbb5489532d28ee2a92a02d5c0dcb"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a41d6429b5de087a49144b10ba030a439"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="audio_8h.html#a41d6429b5de087a49144b10ba030a439">yape_set_pause_sound</a> (FMOD_CHANNEL *channel, int *paused)</td></tr>
-<tr class="separator:a41d6429b5de087a49144b10ba030a439"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a09a1b222e65e184542f4781f8bdce81d"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="audio_8h.html#a09a1b222e65e184542f4781f8bdce81d">yape_get_pause_sound</a> (FMOD_CHANNEL *channel, int *paused)</td></tr>
-<tr class="separator:a09a1b222e65e184542f4781f8bdce81d"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a6bf366a0361da792d1e87c3e92c98f8f"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="audio_8h.html#a6bf366a0361da792d1e87c3e92c98f8f">yape_play_sound</a> (FMOD_SOUND *sound, FMOD_CHANNEL *channel, FMOD_SYSTEM *system)</td></tr>
-<tr class="separator:a6bf366a0361da792d1e87c3e92c98f8f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a835f6953e62c0679d475c0618384d662"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="audio_8h.html#a835f6953e62c0679d475c0618384d662">yape_pause_sound</a> (FMOD_CHANNEL **channel)</td></tr>
+<tr class="separator:a835f6953e62c0679d475c0618384d662"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae4affd073c5c324318b8bf7edf4ee2e1"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="audio_8h.html#ae4affd073c5c324318b8bf7edf4ee2e1">yape_unpause_sound</a> (FMOD_CHANNEL **channel)</td></tr>
+<tr class="separator:ae4affd073c5c324318b8bf7edf4ee2e1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a089b03f95acf573a0be4c9aa58f962b5"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="audio_8h.html#a089b03f95acf573a0be4c9aa58f962b5">yape_play_sound</a> (FMOD_SOUND *sound, FMOD_CHANNEL **channel, FMOD_SYSTEM *system)</td></tr>
+<tr class="separator:a089b03f95acf573a0be4c9aa58f962b5"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p>Audio module Definitions; </p>
+<div class="textblock"><p>Data Type for loading and playing audio. </p>
+<p>Audio module Definitions; <a class="el" href="structyape__sound.html">yape_sound</a> and the accompanying functions handles loading and playing sound.</p>
+<p>you will still need to initialize FMOD_SYSTEM and free FMOD_SYSTEM and sound manually via FMOD_System_Init, FMOD_System_Create, FMOD_Sound_Release, FMOD_System_Close, FMOD_System_Release family of functions.</p>
+<p>Eventually I may do this via a sound_init() sound_quit() </p>
 </div><h2 class="groupheader">Function Documentation</h2>
-<a class="anchor" id="a09a1b222e65e184542f4781f8bdce81d"></a>
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">int yape_get_pause_sound </td>
-          <td>(</td>
-          <td class="paramtype">FMOD_CHANNEL *&#160;</td>
-          <td class="paramname"><em>channel</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">int *&#160;</td>
-          <td class="paramname"><em>paused</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">channel</td><td>channel to check for pause </td></tr>
-    <tr><td class="paramname">paused</td><td>int which determines if a channel is paused </td></tr>
-  </table>
-  </dd>
-</dl>
-
-</div>
-</div>
 <a class="anchor" id="a9139fa56319eb512c39314be9b65b829"></a>
 <div class="memitem">
 <div class="memproto">
@@ -199,14 +169,14 @@ Functions</h2></td></tr>
 
 </div>
 </div>
-<a class="anchor" id="ab5bdbb5489532d28ee2a92a02d5c0dcb"></a>
+<a class="anchor" id="a835f6953e62c0679d475c0618384d662"></a>
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">yape_pause_sound </td>
+          <td class="memname">int yape_pause_sound </td>
           <td>(</td>
-          <td class="paramtype">FMOD_CHANNEL *&#160;</td>
+          <td class="paramtype">FMOD_CHANNEL **&#160;</td>
           <td class="paramname"><em>channel</em></td><td>)</td>
           <td></td>
         </tr>
@@ -214,14 +184,14 @@ Functions</h2></td></tr>
 </div><div class="memdoc">
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">channel</td><td>channel on which to pause sound </td></tr>
+    <tr><td class="paramname">channel</td><td>channel to pause </td></tr>
   </table>
   </dd>
 </dl>
 
 </div>
 </div>
-<a class="anchor" id="a6bf366a0361da792d1e87c3e92c98f8f"></a>
+<a class="anchor" id="a089b03f95acf573a0be4c9aa58f962b5"></a>
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
@@ -234,7 +204,7 @@ Functions</h2></td></tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">FMOD_CHANNEL *&#160;</td>
+          <td class="paramtype">FMOD_CHANNEL **&#160;</td>
           <td class="paramname"><em>channel</em>, </td>
         </tr>
         <tr>
@@ -261,33 +231,22 @@ Functions</h2></td></tr>
 
 </div>
 </div>
-<a class="anchor" id="a41d6429b5de087a49144b10ba030a439"></a>
+<a class="anchor" id="ae4affd073c5c324318b8bf7edf4ee2e1"></a>
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">void yape_set_pause_sound </td>
+          <td class="memname">int yape_unpause_sound </td>
           <td>(</td>
-          <td class="paramtype">FMOD_CHANNEL *&#160;</td>
-          <td class="paramname"><em>channel</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
+          <td class="paramtype">FMOD_CHANNEL **&#160;</td>
+          <td class="paramname"><em>channel</em></td><td>)</td>
           <td></td>
-          <td class="paramtype">int *&#160;</td>
-          <td class="paramname"><em>paused</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
         </tr>
       </table>
 </div><div class="memdoc">
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">channel</td><td>channel in which to play sound </td></tr>
-    <tr><td class="paramname">paused</td><td>an int that determines whether music is paused or not </td></tr>
+    <tr><td class="paramname">channel</td><td>channel to unpause </td></tr>
   </table>
   </dd>
 </dl>
@@ -297,7 +256,7 @@ Functions</h2></td></tr>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Fri Apr 3 2015 02:16:34 for C binding for Yet Another Platforming Engine by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Fri Apr 3 2015 16:18:50 for C binding for Yet Another Platforming Engine by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.9.1
 </small></address>

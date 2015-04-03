@@ -95,31 +95,31 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160;<span class="comment">//Generated with genfile -d audio.h</span></div>
 <div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;<span class="preprocessor">#include &quot;common.h&quot;</span></div>
 <div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;</div>
-<div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;</div>
-<div class="line"><a name="l00018"></a><span class="lineno"><a class="line" href="structyape__sound.html">   18</a></span>&#160;<span class="keyword">struct </span><a class="code" href="structyape__sound.html">yape_sound</a> {</div>
-<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;    FMOD_SOUND  * sound;</div>
-<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;    FMOD_CHANNEL * channel;</div>
-<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;    FMOD_RESULT    result;</div>
-<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;};</div>
-<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;</div>
-<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;<span class="keyword">typedef</span> <span class="keyword">struct </span><a class="code" href="structyape__sound.html">yape_sound</a> <a class="code" href="structyape__sound.html">yape_sound</a>;</div>
+<div class="line"><a name="l00017"></a><span class="lineno"><a class="line" href="structyape__sound.html">   17</a></span>&#160;<span class="keyword">struct </span><a class="code" href="structyape__sound.html">yape_sound</a> {</div>
+<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;    FMOD_SOUND  * sound;</div>
+<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;    FMOD_CHANNEL * channel;</div>
+<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;    FMOD_RESULT    result;</div>
+<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;};</div>
+<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;</div>
+<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;<span class="keyword">typedef</span> <span class="keyword">struct </span><a class="code" href="structyape__sound.html">yape_sound</a> <a class="code" href="structyape__sound.html">yape_sound</a>;</div>
+<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;</div>
 <div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;<a class="code" href="structyape__sound.html">yape_sound</a> <a class="code" href="audio_8h.html#a9139fa56319eb512c39314be9b65b829">yape_load_sound</a>(<span class="keywordtype">char</span> * sound, FMOD_CHANNEL * channel, FMOD_SYSTEM * system);</div>
 <div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;</div>
-<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;<span class="keywordtype">void</span> <a class="code" href="audio_8h.html#ab5bdbb5489532d28ee2a92a02d5c0dcb">yape_pause_sound</a>(FMOD_CHANNEL * channel); </div>
-<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;<span class="keywordtype">void</span> <a class="code" href="audio_8h.html#a41d6429b5de087a49144b10ba030a439">yape_set_pause_sound</a>(FMOD_CHANNEL * channel, <span class="keywordtype">int</span> * paused); </div>
-<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;<span class="keywordtype">int</span>  <a class="code" href="audio_8h.html#a09a1b222e65e184542f4781f8bdce81d">yape_get_pause_sound</a>(FMOD_CHANNEL * channel, <span class="keywordtype">int</span> * paused);</div>
-<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;<span class="keywordtype">void</span> <a class="code" href="audio_8h.html#a6bf366a0361da792d1e87c3e92c98f8f">yape_play_sound</a>(FMOD_SOUND * sound, FMOD_CHANNEL * channel, FMOD_SYSTEM * system); </div>
-<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;<span class="preprocessor">#endif //__AUDIO_H__</span></div>
-<div class="ttc" id="audio_8h_html_a6bf366a0361da792d1e87c3e92c98f8f"><div class="ttname"><a href="audio_8h.html#a6bf366a0361da792d1e87c3e92c98f8f">yape_play_sound</a></div><div class="ttdeci">void yape_play_sound(FMOD_SOUND *sound, FMOD_CHANNEL *channel, FMOD_SYSTEM *system)</div><div class="ttdef"><b>Definition:</b> audio.c:21</div></div>
-<div class="ttc" id="structyape__sound_html"><div class="ttname"><a href="structyape__sound.html">yape_sound</a></div><div class="ttdoc">Data Type for loading and playing audio. </div><div class="ttdef"><b>Definition:</b> audio.h:18</div></div>
-<div class="ttc" id="audio_8h_html_a09a1b222e65e184542f4781f8bdce81d"><div class="ttname"><a href="audio_8h.html#a09a1b222e65e184542f4781f8bdce81d">yape_get_pause_sound</a></div><div class="ttdeci">int yape_get_pause_sound(FMOD_CHANNEL *channel, int *paused)</div><div class="ttdef"><b>Definition:</b> audio.c:16</div></div>
+<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;<span class="keywordtype">int</span> <a class="code" href="audio_8h.html#a835f6953e62c0679d475c0618384d662">yape_pause_sound</a>(FMOD_CHANNEL ** channel); </div>
+<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;</div>
+<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;<span class="keywordtype">int</span> <a class="code" href="audio_8h.html#ae4affd073c5c324318b8bf7edf4ee2e1">yape_unpause_sound</a>(FMOD_CHANNEL ** channel);</div>
+<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;</div>
+<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;<span class="keywordtype">void</span> <a class="code" href="audio_8h.html#a089b03f95acf573a0be4c9aa58f962b5">yape_play_sound</a>(FMOD_SOUND * sound, FMOD_CHANNEL ** channel, FMOD_SYSTEM * system); </div>
+<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;<span class="preprocessor">#endif //__AUDIO_H__</span></div>
+<div class="ttc" id="structyape__sound_html"><div class="ttname"><a href="structyape__sound.html">yape_sound</a></div><div class="ttdef"><b>Definition:</b> audio.h:17</div></div>
+<div class="ttc" id="audio_8h_html_a089b03f95acf573a0be4c9aa58f962b5"><div class="ttname"><a href="audio_8h.html#a089b03f95acf573a0be4c9aa58f962b5">yape_play_sound</a></div><div class="ttdeci">void yape_play_sound(FMOD_SOUND *sound, FMOD_CHANNEL **channel, FMOD_SYSTEM *system)</div><div class="ttdef"><b>Definition:</b> audio.c:22</div></div>
+<div class="ttc" id="audio_8h_html_ae4affd073c5c324318b8bf7edf4ee2e1"><div class="ttname"><a href="audio_8h.html#ae4affd073c5c324318b8bf7edf4ee2e1">yape_unpause_sound</a></div><div class="ttdeci">int yape_unpause_sound(FMOD_CHANNEL **channel)</div><div class="ttdef"><b>Definition:</b> audio.c:17</div></div>
+<div class="ttc" id="audio_8h_html_a835f6953e62c0679d475c0618384d662"><div class="ttname"><a href="audio_8h.html#a835f6953e62c0679d475c0618384d662">yape_pause_sound</a></div><div class="ttdeci">int yape_pause_sound(FMOD_CHANNEL **channel)</div><div class="ttdef"><b>Definition:</b> audio.c:12</div></div>
 <div class="ttc" id="audio_8h_html_a9139fa56319eb512c39314be9b65b829"><div class="ttname"><a href="audio_8h.html#a9139fa56319eb512c39314be9b65b829">yape_load_sound</a></div><div class="ttdeci">yape_sound yape_load_sound(char *sound, FMOD_CHANNEL *channel, FMOD_SYSTEM *system)</div><div class="ttdef"><b>Definition:</b> audio.c:3</div></div>
-<div class="ttc" id="audio_8h_html_a41d6429b5de087a49144b10ba030a439"><div class="ttname"><a href="audio_8h.html#a41d6429b5de087a49144b10ba030a439">yape_set_pause_sound</a></div><div class="ttdeci">void yape_set_pause_sound(FMOD_CHANNEL *channel, int *paused)</div><div class="ttdef"><b>Definition:</b> audio.c:12</div></div>
-<div class="ttc" id="audio_8h_html_ab5bdbb5489532d28ee2a92a02d5c0dcb"><div class="ttname"><a href="audio_8h.html#ab5bdbb5489532d28ee2a92a02d5c0dcb">yape_pause_sound</a></div><div class="ttdeci">void yape_pause_sound(FMOD_CHANNEL *channel)</div></div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Fri Apr 3 2015 02:16:34 for C binding for Yet Another Platforming Engine by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Fri Apr 3 2015 16:18:50 for C binding for Yet Another Platforming Engine by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.9.1
 </small></address>

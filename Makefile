@@ -1,5 +1,5 @@
 OBJ = main.c src/include/graphics.c src/include/audio.c
-CFLAGS = -Weverything -std=c11 -Isrc/ -Isrc/include/
+CFLAGS = -Weverything -Wno-documentation -Wno-padded -std=c11 -Isrc/ -Isrc/include/
 LFLAGS = -lSDL2_image -lfreetype -lSDL2_ttf -lfmodex
 BIN="cyape-1.0"
 CC=clang
