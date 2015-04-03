@@ -11,14 +11,14 @@ int main(){
 	a_list[1] = "assets/world/Alien.png";
 	a_list[2] = "assets/world/block.png";
 	
-	struct Texture texture_list[10];
+	yape_texture texture_list[10];
 	
 	if (SDL_Init(SDL_INIT_EVERYTHING) != 0) {
 		printf("Couldn't Initialize SDL!\n");
 		exit(-1);
     	}
 	SDL_Event event;
-    	Window window = {
+    	yape_window window = {
 		.name = "Cyape 1.1",
 		.done = 0,
 		.size = {
@@ -36,39 +36,52 @@ int main(){
 		1, 
 		SDL_RENDERER_ACCELERATED | SDL_RENDERER_PRESENTVSYNC
 	);
+	TTF_Init();
+	TTF_Font * font = TTF_OpenFont("main.ttf",20);
 
-	load_textures(a_list,2,&texture_list,window.rnd);
+	//load_textures(a_list,2,&texture_list,window.rnd);
+	texture_list[0] = yape_load_texture(a_list[0],window.rnd);
+	texture_list[1] = yape_load_texture(a_list[1],window.rnd);
+	texture_list[2] = yape_load_texture(a_list[2],window.rnd);
 
-	struct Texture * background = &texture_list[0];
-	struct Texture * sprite = &texture_list[1];
+	yape_texture * background = &texture_list[0];
+	yape_texture * sprite = &texture_list[1];
 		sprite->size.x = 50;
 		sprite->size.y = 50;
-	struct Texture * block = &texture_list[2];
+	yape_texture * block = &texture_list[2];
 		block->size.x = 50;
 		block->size.y = 50;
-	SDL_Texture ** sprite_img = &sprite->image;
+	yape_texture sprite_back = *sprite;
+	
+	SDL_Color color = {0,0,0,0};	
+	yape_label test = yape_make_label("Hello I am a Font!", font, 20, 20, color, window.rnd);
 
     	while(window.done != 1){
 		while(SDL_PollEvent(&event) != 0){
 			if(event.type == SDL_QUIT){
 				window.done = 1;
 			}
-			if(event.type == SDL_KEYDOWN && event.key.repeat == 0){
+			if(event.type == SDL_KEYDOWN ){
 				switch(event.key.keysym.sym){
 					case SDLK_SPACE:
 						if(hasChanged == 0){
 							sprite->image = block->image;
 							hasChanged = 1;
-						} else if (hasChanged == 1){
-							sprite->image = *sprite_img;
+							puts("Sprite Changed to block");
+							break;
+						}
+						if(hasChanged == 1){
+							sprite->image = sprite_back.image;
 							hasChanged = 0;
+							puts("Sprite changed back to sprite");
+							break;
 						}
 						break;
 					case SDLK_w:
-						sprite->size.y += 20;
+						sprite->size.y -= 20;
 						break;
 					case SDLK_s:
-						sprite->size.y -= 20;
+						sprite->size.y += 20;
 						break;
 					case SDLK_a:
 						sprite->size.x -= 20;
@@ -81,12 +94,31 @@ int main(){
 						break;
 				}
 			}
+			if(event.type == SDL_KEYUP ) {
+				switch(event.key.keysym.sym) {
+					case SDLK_w:
+						sprite->size.y += 20;
+						break;
+					case SDLK_s:
+						sprite->size.y -= 20;
+						break;
+					case SDLK_a:
+						sprite->size.x += 20;
+						break;
+					case SDLK_d:
+						sprite->size.x -= 20;
+						break;
+				}
+			}
 		}
 		SDL_RenderClear(window.rnd);
 		SDL_RenderCopy(window.rnd,background->image,NULL,&background->size);
+		SDL_RenderCopy(window.rnd,test.image, NULL, &test.size);
 		SDL_RenderCopy(window.rnd,sprite->image,NULL,&sprite->size);
 		SDL_RenderPresent(window.rnd);
 	}
+	TTF_CloseFont(font);
+	TTF_Quit();
     	SDL_DestroyRenderer(window.rnd);
     	SDL_DestroyWindow(window.window);
     	SDL_Quit();
