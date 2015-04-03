@@ -10,8 +10,9 @@ bug fixes may go 1.subversion.1 - 5 (ie 1.0.5 then it would roll over to 1.1)
 
 Features for 1.0
 [ ] implement level format either xml, custom or possibly yaml not all are required
-[ ] implement texture loading 
-[ ] implement audio loading and playing
+[X] implement texture (including TTF ) loading 
+[X!] implement audio loading and playing 
+	!- (loading and playing currently working pause has not been tested yet)
 [ ] implement phsyics via Box2d, custom, or possibly chipmunk not all are required
 [ ] implement some form of scriptable ai preferably in python
 [ ] implement rudimentary network code ( ie able to send and recieve library structures )

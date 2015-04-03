@@ -4,7 +4,7 @@
 
 int main(){
 	
-	int hasChanged = 0;
+	int hasChanged = 0, song_playing = 0, song_paused = 0;
 	char * a_list[3];
 	
 	a_list[0] = "assets/ui/background.png";
@@ -38,6 +38,13 @@ int main(){
 	);
 	TTF_Init();
 	TTF_Font * font = TTF_OpenFont("main.ttf",20);
+	//FMOD
+	yape_sound song;
+	FMOD_SYSTEM * sound_system;
+	FMOD_System_Create(&sound_system);
+	FMOD_System_Init(sound_system, 1, FMOD_INIT_NORMAL, NULL);
+	song = yape_load_sound("assets/music/technicolor.mp3", song.channel, sound_system);
+	//end FMOD
 
 	//load_textures(a_list,2,&texture_list,window.rnd);
 	texture_list[0] = yape_load_texture(a_list[0],window.rnd);
@@ -111,12 +118,23 @@ int main(){
 				}
 			}
 		}
+		if(song_playing == 0)
+		{
+			yape_play_sound(song.sound, song.channel, sound_system);
+			song_playing = 1;
+		}
+		if(song_playing == 1 && song_paused != 0) {
+			FMOD_System_Update(sound_system);
+		}
 		SDL_RenderClear(window.rnd);
 		SDL_RenderCopy(window.rnd,background->image,NULL,&background->size);
 		SDL_RenderCopy(window.rnd,test.image, NULL, &test.size);
 		SDL_RenderCopy(window.rnd,sprite->image,NULL,&sprite->size);
 		SDL_RenderPresent(window.rnd);
 	}
+	FMOD_Sound_Release(song.sound);
+	FMOD_System_Close(sound_system);
+	FMOD_System_Release(sound_system);
 	TTF_CloseFont(font);
 	TTF_Quit();
     	SDL_DestroyRenderer(window.rnd);

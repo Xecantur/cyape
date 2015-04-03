@@ -1,6 +1,6 @@
-OBJ = main.c src/include/graphics.c
+OBJ = main.c src/include/graphics.c src/include/audio.c
 CFLAGS = -Weverything -std=c11 -Isrc/ -Isrc/include/
-LFLAGS = -lSDL2_image -lfreetype -lSDL2_ttf
+LFLAGS = -lSDL2_image -lfreetype -lSDL2_ttf -lfmodex
 BIN="cyape-1.0"
 CC=clang
 all:
@@ -10,4 +10,4 @@ debug:
 	${CC} src/${OBJ} ${CFLAGS} `sdl2-config --cflags --libs` ${LFLAGS} -o `pwd`/${BIN} -g -DDEBUG
 
 release:
-	${CC} src/${OBJ} ${CFLAGS} ${SDL_FLAGS} ${LFLAGS} -o ${BIN} -02 -DNO_WARNINGS
+	${CC} src/${OBJ} ${CFLAGS} `sdl2-config --cflags --libs` ${LFLAGS} -o ${BIN} -O2 -DNO_WARNINGS

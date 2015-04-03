@@ -3,5 +3,6 @@
 //Generated with genfile -d cyape.h
 #include "include/common.h"
 #include "include/graphics.h"
+#include "include/audio.h"
 
 #endif //__CYAPE_H__

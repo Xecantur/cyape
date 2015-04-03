@@ -7,6 +7,6 @@
 #include <SDL2/SDL.h>
 #include <SDL2/SDL_image.h>
 #include <SDL2/SDL_ttf.h>
-
+#include <fmodex/fmod.h>
 
 #endif //__COMMON_H__
